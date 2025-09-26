@@ -34,7 +34,6 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
 
-    # Configuracoes nativas
     permissions:
       pages: write 
       id-token: write 
@@ -44,11 +43,9 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      # ➡️ PASSO CRÍTICO: BAIXAR o artefato criado no Job 'build'
       - name: Download artifact
         uses: actions/download-pages-artifact@v1 
         
-      # ➡️ DEPLOY: Usar a action nativa para publicar o artefato baixado
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
