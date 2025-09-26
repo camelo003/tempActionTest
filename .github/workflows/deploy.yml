@@ -31,21 +31,26 @@ jobs:
           path: build
 
   deploy:
-    name: Deploy to GitHub Pages
-    needs: build
+    name: Deploy to GitHub Pages
+    needs: build
 
-    permissions:
-      pages: write 
-      id-token: write 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-pages-artifact@v1 
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Download the artifact created in the 'build' job
+      - name: Download artifact
+        uses: actions/download-pages-artifact@v1 
+        
+      # 2. Deploy the downloaded artifact
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
