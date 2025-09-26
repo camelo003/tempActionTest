@@ -34,7 +34,7 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
 
-    # Configurações nativas
+    # Configuracoes nativas
     permissions:
       pages: write 
       id-token: write 
