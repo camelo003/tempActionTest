@@ -46,9 +46,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifact
-        uses: actions/download-pages-artifact@v1
-    
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build # The folder the action should deploy.
