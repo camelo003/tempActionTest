@@ -53,10 +53,8 @@ jobs:
         with:
           name: bld
           path: build
-
-     - name: Check downloaded files
+      - name: Check downloaded files
         run: ls -lR
-
       # 2. Deploy the downloaded artifact
       - name: Deploy to GitHub Pages
         id: deployment
