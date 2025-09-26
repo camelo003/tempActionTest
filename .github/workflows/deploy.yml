@@ -49,7 +49,9 @@ jobs:
       # 1. Download the artifact created in the 'build' job
       - name: Download artifact
         uses: actions/download-artifact@v5
-        
+        with:
+          path: build
+
       # 2. Deploy the downloaded artifact
       - name: Deploy to GitHub Pages
         id: deployment
