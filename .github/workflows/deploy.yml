@@ -54,7 +54,7 @@ jobs:
           name: bld
           path: build
       - name: extract
-        run: tar -xzf github-pages/artifact.tar -C github-pages
+        run: tar -xzf artifact.tar -C github-pages
       # 2. Deploy the downloaded artifact
       - name: Deploy to GitHub Pages
         id: deployment
