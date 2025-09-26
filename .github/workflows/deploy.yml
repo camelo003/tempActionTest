@@ -53,8 +53,8 @@ jobs:
         with:
           name: bld
           path: build
-      - name: Check downloaded files
-        run: ls -lR
+      - name: extract
+        run: tar -xzf github-pages/artifact.tar -C github-pages
       # 2. Deploy the downloaded artifact
       - name: Deploy to GitHub Pages
         id: deployment
