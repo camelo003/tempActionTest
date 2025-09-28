@@ -40,7 +40,7 @@ jobs:
       - name: Push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git push origin gh-pages
+        run: git push --force origin gh-pages
 
 #      - name: Upload Build Artifact
 #        uses: actions/upload-pages-artifact@v3
