@@ -22,8 +22,6 @@ jobs:
           cache: npm
       - name: My Git Log
         run: git log --oneline --graph --all
-      - name: Pulling around
-        run: git pull origin
       - name: Install dependencies
         run: npm ci
       - name: Build website
@@ -36,9 +34,9 @@ jobs:
         run: |
           git symbolic-ref HEAD refs/heads/gh-pages
           git reset
+          git pull origin
           git add build/
           git commit -m "auto commit"
-          git push origin gh-pages
           echo '( >,")>'
       - name: Push changes
         env:
