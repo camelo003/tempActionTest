@@ -34,7 +34,6 @@ jobs:
         run: |
           git symbolic-ref HEAD refs/heads/gh-pages
           git reset
-          git pull origin
           git add build/
           git commit -m "auto commit"
           echo '( >,")>'
