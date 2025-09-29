@@ -31,7 +31,7 @@ jobs:
       - name: Delete all but build
         run: for I in $(ls -a | grep -Ev "build|^\.$|^\.\.$|\.git$"); do if [ -f $I ]; then rm -f $I; else rm -fr $I; fi; done
       - name: Bring built to root
-        run: mv build/* .
+        run: mv build/tempActionTest/* .
       - name: Remove empty build dir
         run: rm -r build/
       - name: Indexing
