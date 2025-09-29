@@ -31,9 +31,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
       - name: Delete all but build
-        run: |
-          for I in $(ls -d */ | grep -v build); do rm -fr $I; done
-          for I in $(ls -a | grep -Ev "^\.$|^\.\.$|\.git"); do rm -f $I; done
+        run: for I in $(ls -a | grep -Ev "build|^\.$|^\.\.$|\.git"); do if [ -f $I ]; then echo "FILE! $I"; else echo "DIR! $I"; fi; done
       - name: Bring built to root
         run: mv build/* .
       - name: Remove empty build dir
