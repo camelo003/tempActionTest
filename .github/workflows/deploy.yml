@@ -31,7 +31,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
       - name: Delete all but build
-        run: for I in $(ls -a | grep -Ev "build|^\.$|^\.\.$|\.git"); do if [ -f $I ]; then echo "FILE! $I"; else echo "DIR! $I"; fi; done
+        run: for I in $(ls -a | grep -Ev "build|^\.$|^\.\.$|\.git"); do if [ -f $I ]; then rm -f $I; else rm -fr $I; fi; done
       - name: Bring built to root
         run: mv build/* .
       - name: Remove empty build dir
@@ -40,7 +40,7 @@ jobs:
         run: |
           git symbolic-ref HEAD refs/heads/gh-pages
           git reset
-          git add build/
+          git add .
           git commit -m "auto commit"
           echo '( >,")>'
       - name: Push changes
