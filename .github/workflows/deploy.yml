@@ -20,8 +20,6 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - name: My Git Log
-        run: git log --oneline --graph --all
       - name: Install dependencies
         run: npm ci
       - name: Build website
@@ -31,7 +29,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
       - name: Delete all but build
-        run: for I in $(ls -a | grep -Ev "build|^\.$|^\.\.$|\.git"); do if [ -f $I ]; then rm -f $I; else rm -fr $I; fi; done
+        run: for I in $(ls -a | grep -Ev "build|^\.$|^\.\.$|\.git$"); do if [ -f $I ]; then rm -f $I; else rm -fr $I; fi; done
       - name: Bring built to root
         run: mv build/* .
       - name: Remove empty build dir
