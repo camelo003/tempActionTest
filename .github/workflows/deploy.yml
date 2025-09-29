@@ -30,6 +30,14 @@ jobs:
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
+      - name: Delete all but build
+        run: |
+          for I in $(ls -d */ | grep -v build); do rm -fr $I; done
+          for I in $(ls -a | grep -Ev "^\.$|^\.\.$|\.git"); do rm -f $I; done
+      - name: Bring built to root
+        run: mv build/* .
+      - name: Remove empty build dir
+        run: rm -r build/
       - name: Indexing
         run: |
           git symbolic-ref HEAD refs/heads/gh-pages
@@ -42,37 +50,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: git push --force origin gh-pages
 
-#      - name: Upload Build Artifact
-#        uses: actions/upload-pages-artifact@v3
-#        with:
-#          name: bld
-#          path: build
 
-#  deploy:
-#    name: Deploy to GitHub Pages
-#    needs: build
-
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-#    permissions:
-#      pages: write # to deploy to Pages
-#      id-token: write # to verify the deployment originates from an appropriate source
-
-    # Deploy to the github-pages environment
-#    environment:
-#      name: github-pages
-#      url: ${{ steps.deployment.outputs.page_url }}
-
-#    runs-on: ubuntu-latest
-#    steps:
-      # 1. Download the artifact created in the 'build' job
-#      - name: Download artifact
-#        uses: actions/download-artifact@v5
-#        with:
-#          name: bld
-#          path: build
-#      - name: extract
-#        run: tar -xzf artifact.tar -C github-pages
-      # 2. Deploy the downloaded artifact
-#      - name: Deploy to GitHub Pages
-#        id: deployment
-#        uses: actions/deploy-pages@v3
